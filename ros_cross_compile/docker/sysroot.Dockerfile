@@ -15,6 +15,20 @@ COPY bin/* /usr/bin/
 RUN echo 'Etc/UTC' > /etc/timezone && \
     ln -sf /usr/share/zoneinfo/Etc/UTC /etc/localtime
 
+RUN mv /etc/apt/sources.list /etc/apt/sources.list.bak
+RUN echo $'deb http://mirrors.aliyun.com/ubuntu-ports/ bionic main \n\
+deb-src http://mirrors.aliyun.com/ubuntu-ports/ bionic main \n\
+deb http://mirrors.aliyun.com/ubuntu-ports/ bionic-updates main \n\
+deb-src http://mirrors.aliyun.com/ubuntu-ports/ bionic-updates main \n\
+deb http://mirrors.aliyun.com/ubuntu-ports/ bionic universe \n\
+deb-src http://mirrors.aliyun.com/ubuntu-ports/ bionic universe \n\
+deb http://mirrors.aliyun.com/ubuntu-ports/ bionic-updates universe \n\
+deb-src http://mirrors.aliyun.com/ubuntu-ports/ bionic-updates universe \n\
+deb http://mirrors.aliyun.com/ubuntu-ports/ bionic-security main \n\
+deb-src http://mirrors.aliyun.com/ubuntu-ports/ bionic-security main \n\
+deb http://mirrors.aliyun.com/ubuntu-ports/ bionic-security universe \n\
+deb-src http://mirrors.aliyun.com/ubuntu-ports/ bionic-security universe' > /etc/apt/sources.list
+
 RUN apt-get update && apt-get install --no-install-recommends -y \
         tzdata \
         locales \
@@ -99,4 +113,7 @@ RUN colcon mixin add cc_mixin file://$(pwd)/mixins/index.yaml && colcon mixin up
 # In case the workspace did not actually install any dependencies, add these for uniformity
 COPY build_workspace.sh /root
 WORKDIR /ros_ws
+ENV http_proxy "http://127.0.0.1:1081"
+ENV https_proxy "http://127.0.0.1:1081"
+ENV socks_proxy "socks://127.0.0.1:1080"
 ENTRYPOINT ["/root/build_workspace.sh"]
