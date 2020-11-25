@@ -73,6 +73,7 @@ class DockerClient:
             quiet=False,
             nocache=self._disable_cache,
             decode=True,
+            network_mode='host'
         )
         self._process_build_log(log_generator)
 
@@ -115,6 +116,7 @@ class DockerClient:
             }
             for src, dest in volumes.items()
         }
+        print(docker_volumes)
         environment['COLCON_DEFAULTS_FILE'] = self._colcon_defaults_file
         # Note that the `run` kwarg `stream` is not available
         # in the version of dockerpy that we are using, so we must detach to live-stream logs
@@ -126,7 +128,7 @@ class DockerClient:
             environment=environment,
             volumes=docker_volumes,
             detach=True,
-            network_mode='host',
+            network_mode='host'
         )
         try:
             logs = container.logs(stream=True)
@@ -140,6 +142,7 @@ class DockerClient:
         if docker.version_info[0] >= 3:
             exit_code = exit_code['StatusCode']
 
+        print('exit_code: {0}'.format(exit_code))
         if exit_code:
             raise docker.errors.ContainerError(
                 image_name, exit_code, '', image_name, 'See above ^')
