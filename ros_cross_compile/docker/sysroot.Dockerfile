@@ -110,7 +110,9 @@ RUN apt-get update && apt-get install -y \
     libgtkmm-3.0-dev \
     libgtksourceviewmm-3.0-dev \
     libpqxx-dev \
-    libgraphicsmagick++1-dev
+    libgraphicsmagick++1-dev \
+    libboost-python-dev \
+    libboost-filesystem-dev
 
 RUN  git clone https://github.com/google/googletest.git /googletest \
     && mkdir -p /googletest/build \
