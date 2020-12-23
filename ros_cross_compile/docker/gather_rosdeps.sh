@@ -16,7 +16,7 @@ fi
 out_dir=$(dirname "${OUT_PATH}")
 mkdir -p "${out_dir}"
 
-rosdep update
+rosdep update --include-eol-distros
 
 cat > "${OUT_PATH}" <<EOF
 #!/bin/bash
@@ -24,6 +24,8 @@ set -euxo pipefail
 EOF
 
 mapfile -t package_paths < <(colcon list -p)
+#echo "$(pwd && ls)"
+#echo "$(colcon list -p)"
 
 rosdep install \
     --os "${TARGET_OS}" \
