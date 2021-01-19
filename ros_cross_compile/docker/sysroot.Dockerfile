@@ -112,7 +112,8 @@ RUN apt-get update && apt-get install -y \
     libpqxx-dev \
     libgraphicsmagick++1-dev \
     libboost-python-dev \
-    libboost-filesystem-dev
+    libboost-filesystem-dev \
+    libboost-thread-dev
 
 RUN  git clone https://github.com/google/googletest.git /googletest \
     && mkdir -p /googletest/build \
