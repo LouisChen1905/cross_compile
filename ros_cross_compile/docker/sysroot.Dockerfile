@@ -16,9 +16,9 @@ COPY pip.conf /etc/pip.conf
 RUN echo 'Etc/UTC' > /etc/timezone && \
     ln -sf /usr/share/zoneinfo/Etc/UTC /etc/localtime
 
-ENV http_proxy "http://127.0.0.1:1081"
-ENV https_proxy "http://127.0.0.1:1081"
-ENV socks_proxy "socks://127.0.0.1:1080"
+#ENV http_proxy "http://127.0.0.1:1081"
+#ENV https_proxy "http://127.0.0.1:1081"
+#ENV socks_proxy "socks://127.0.0.1:1080"
 RUN echo $'APT::Acquire::Retries \"3\";' > /etc/apt/apt.conf.d/80-retries
 
 RUN mv /etc/apt/sources.list /etc/apt/sources.list.bak
@@ -110,7 +110,10 @@ RUN apt-get update && apt-get install -y \
     libgtkmm-3.0-dev \
     libgtksourceviewmm-3.0-dev \
     libpqxx-dev \
-    libgraphicsmagick++1-dev
+    libgraphicsmagick++1-dev \
+    libboost-python-dev \
+    libboost-filesystem-dev \
+    libboost-thread-dev
 
 RUN  git clone https://github.com/google/googletest.git /googletest \
     && mkdir -p /googletest/build \

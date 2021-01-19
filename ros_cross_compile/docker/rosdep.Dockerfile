@@ -28,9 +28,9 @@ RUN apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E
 #RUN echo "deb http://packages.ros.org/ros/ubuntu bionic main" > /etc/apt/sources.list.d/ros-latest.list
 RUN mkdir -p /etc/apt/sources.list.d/
 RUN echo $'deb http://mirrors.tuna.tsinghua.edu.cn/ros2/ubuntu bionic main' > /etc/apt/sources.list.d/ros2-latest.list
-ENV http_proxy "http://127.0.0.1:1081"
-ENV https_proxy "http://127.0.0.1:1081"
-ENV socks_proxy "socks://127.0.0.1:1080"
+#ENV http_proxy "http://127.0.0.1:1081"
+#ENV https_proxy "http://127.0.0.1:1081"
+#ENV socks_proxy "socks://127.0.0.1:1080"
 #RUN curl -s 'https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc' | apt-key add -
 RUN apt-get update && apt-get install --no-install-recommends -y \
       python-rosdep \
