@@ -16,8 +16,8 @@ COPY pip.conf /etc/pip.conf
 RUN echo 'Etc/UTC' > /etc/timezone && \
     ln -sf /usr/share/zoneinfo/Etc/UTC /etc/localtime
 
-#ENV http_proxy "http://127.0.0.1:1081"
-#ENV https_proxy "http://127.0.0.1:1081"
+ENV http_proxy "http://127.0.0.1:1081"
+ENV https_proxy "http://127.0.0.1:1081"
 #ENV socks_proxy "socks://127.0.0.1:1080"
 RUN echo $'APT::Acquire::Retries \"3\";' > /etc/apt/apt.conf.d/80-retries
 

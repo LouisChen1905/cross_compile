@@ -36,6 +36,7 @@ rosdep install \
     --default-yes \
     --skip-keys "${SKIP_ROSDEP_KEYS}" \
     --simulate \
+    --include-eol-distros \
   >> /tmp/all-deps.sh
 
 # Grep returns nonzero when there are no matches and we exit on error in this script,
